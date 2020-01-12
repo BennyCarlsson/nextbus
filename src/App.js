@@ -1,13 +1,13 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import logo from "./logo.png"
 import "./App.css"
-import { id } from "./supersecretfile"
 
 function App() {
+  const [timeTable, setTimeTable] = useState()
   useEffect(() => {
     const getTimeTable = async () => {
       const data = await getData()
-      console.log(data)
+      setTimeTable(data)
     }
     getTimeTable()
   }, [])
@@ -16,34 +16,69 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>BussJävel!</p>
+        <h1>Nästa BussJävel!</h1>
+        <h2>
+          {timeTable && timeTable[0].time} ({timeTable && timeTable[0].rtTime})
+        </h2>
+        <p>{timeTable && timeTable[1].time}</p>
+        <p>{timeTable && timeTable[2].time}</p>
+        <p>{timeTable && timeTable[3].time}</p>
+        <h3>Partille Port -> Göteborg Nordstan</h3>
       </header>
     </div>
   )
 }
 
+var token = { accessToken: "", expires: null }
+const id =
+  "T0hDc2txdEp6cDhMYlVmRjhsaWVfeERHdDBBYTp6ME5wWWY3dlYxbUFhTEVFbkdyRFprTGEwODBh"
+
 const getData = async () => {
-  let data = {}
-  try {
-    data = fetchData()
-  } catch (error) {
-    console.log("Something went wrong fetching data", error)
+  let data
+  if (!isTokenValid()) {
+    await setToken()
+  }
+  let response = await fetchData()
+  if (response.status === 401) {
+    await setToken()
+    response = await fetchData()
+  }
+  if (response.status === 200) {
+    data = await response.json()
+    return data.DepartureBoard.Departure.filter(buss => buss.track === "A")
   }
   return data
 }
 
 const fetchData = async () => {
-  const acessToken = await fetchAccessToken()
   const { date, time } = getTime()
   const tripUrl = `https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=9022014013213001&date=${date}&time=${time}&format=json`
   const response = await fetch(tripUrl, {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${acessToken}`
+      Authorization: `Bearer ${token.accessToken}`
     }
   })
-  const data = await response.json()
-  return data.DepartureBoard
+  return response
+}
+
+const isTokenValid = () => {
+  if (!token.accessToken) return false
+  if (token.expires && token.expires > new Date()) return false
+  return true
+}
+
+const setToken = async () => {
+  const data = await fetchAccessToken()
+  const expires = getExpireTime(data.expires_in)
+  const accessToken = data.access_token
+  token = { accessToken, expires }
+}
+
+const getExpireTime = secondsToExpires => {
+  let date = new Date()
+  date.setSeconds(date.getSeconds() + secondsToExpires)
+  return date
 }
 
 const fetchAccessToken = async () => {
@@ -56,7 +91,7 @@ const fetchAccessToken = async () => {
     body: "grant_type=client_credentials"
   })
   const data = await response.json()
-  return data.access_token
+  return data
 }
 
 const getTime = () => {
