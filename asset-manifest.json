@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/nextbus/static/css/main.fff14d08.chunk.css",
+    "main.js": "/nextbus/static/js/main.ac8ca419.chunk.js",
+    "main.js.map": "/nextbus/static/js/main.ac8ca419.chunk.js.map",
+    "runtime-main.js": "/nextbus/static/js/runtime-main.20a07480.js",
+    "runtime-main.js.map": "/nextbus/static/js/runtime-main.20a07480.js.map",
+    "static/js/2.843b9e79.chunk.js": "/nextbus/static/js/2.843b9e79.chunk.js",
+    "static/js/2.843b9e79.chunk.js.map": "/nextbus/static/js/2.843b9e79.chunk.js.map",
+    "index.html": "/nextbus/index.html",
+    "precache-manifest.71ef74338f3b6f865d5364911fb58d4c.js": "/nextbus/precache-manifest.71ef74338f3b6f865d5364911fb58d4c.js",
+    "service-worker.js": "/nextbus/service-worker.js",
+    "static/css/main.fff14d08.chunk.css.map": "/nextbus/static/css/main.fff14d08.chunk.css.map",
+    "static/js/2.843b9e79.chunk.js.LICENSE": "/nextbus/static/js/2.843b9e79.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.20a07480.js",
+    "static/js/2.843b9e79.chunk.js",
+    "static/css/main.fff14d08.chunk.css",
+    "static/js/main.ac8ca419.chunk.js"
+  ]
+}
