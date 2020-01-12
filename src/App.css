@@ -1,18 +1,91 @@
+body {
+  font-family: "Rubik", sans-serif;
+}
+h1 {
+  line-height: 1.4;
+  letter-spacing: 2px;
+  text-shadow: 3px 4px 4px black;
+}
+h2,
+h3 {
+  line-height: 1.4;
+  letter-spacing: 2px;
+  text-shadow: 1px 2px 4px black;
+}
+p {
+  line-height: 1;
+  letter-spacing: 1px;
+  text-shadow: 1px 2px 4px black;
+}
 .App {
   text-align: center;
-}
-
-.App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
+.TimeTable {
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.TheTime {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.TheTimeBlock {
+  width: 100%;
+}
+.nextBusTime {
+  font-size: 7em;
+  margin: 0;
+  padding: 0;
+}
+.realTime {
+  color: #cf5a5a;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 30px;
+  margin-top: -15px;
+}
+.busIcon {
+  color: #dddd47;
+  font-size: 15px;
+  padding-right: 13px;
+}
 
+.fromToWrapper {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.fromTo {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.from {
+  flex-basis: 100%;
+}
+.arrow {
+  font-size: 23px;
+  flex-basis: 25%;
+}
+.to {
+  flex-basis: 100%;
+}
 .exchangeArrows {
   font-size: 30px;
 }

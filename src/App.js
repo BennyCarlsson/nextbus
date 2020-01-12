@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useCallback } from "react"
+import React, { useEffect, useState, useCallback, Fragment } from "react"
 import "./App.css"
 import { getData } from "./utils"
 import { partillePort, nordstan } from "./constants"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faArrowRight, faExchangeAlt } from "@fortawesome/free-solid-svg-icons"
+import TheTime from "./components/TheTime"
+import NextTimes from "./components/NextTimes"
+import FromTo from "./components/FromTo"
 
 function App() {
   const [timeTable, setTimeTable] = useState()
@@ -27,24 +28,23 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h2>
-          {timeTable && timeTable[0].time} ({timeTable && timeTable[0].rtTime})
-        </h2>
-        <p>{timeTable && timeTable[1].time}</p>
-        <p>{timeTable && timeTable[2].time}</p>
-        <p>{timeTable && timeTable[3].time}</p>
-        <h3 onClick={handleSwap}>
-          {from.name} <FontAwesomeIcon icon={faArrowRight} /> {destination.name}
-        </h3>
-        <FontAwesomeIcon
-          className="exchangeArrows"
-          onClick={handleSwap}
-          icon={faExchangeAlt}
-        />
-      </header>
-    </div>
+    <Fragment>
+      {timeTable ? (
+        <div className="App">
+          <div className="TimeTable">
+            <TheTime timeTable={timeTable} />
+            <NextTimes timeTable={timeTable} />
+          </div>
+          <FromTo
+            handleSwap={handleSwap}
+            from={from}
+            destination={destination}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+    </Fragment>
   )
 }
 
