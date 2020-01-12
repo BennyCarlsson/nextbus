@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/nextbus/static/css/main.1ed32513.chunk.css",
-    "main.js": "/nextbus/static/js/main.c0fadf26.chunk.js",
-    "main.js.map": "/nextbus/static/js/main.c0fadf26.chunk.js.map",
+    "main.css": "/nextbus/static/css/main.b6ed747e.chunk.css",
+    "main.js": "/nextbus/static/js/main.8f462401.chunk.js",
+    "main.js.map": "/nextbus/static/js/main.8f462401.chunk.js.map",
     "runtime-main.js": "/nextbus/static/js/runtime-main.20a07480.js",
     "runtime-main.js.map": "/nextbus/static/js/runtime-main.20a07480.js.map",
-    "static/js/2.fd267adf.chunk.js": "/nextbus/static/js/2.fd267adf.chunk.js",
-    "static/js/2.fd267adf.chunk.js.map": "/nextbus/static/js/2.fd267adf.chunk.js.map",
+    "static/js/2.52a7322a.chunk.js": "/nextbus/static/js/2.52a7322a.chunk.js",
+    "static/js/2.52a7322a.chunk.js.map": "/nextbus/static/js/2.52a7322a.chunk.js.map",
     "index.html": "/nextbus/index.html",
-    "precache-manifest.ea5380e756c76e5e2f6bc6b8a831be48.js": "/nextbus/precache-manifest.ea5380e756c76e5e2f6bc6b8a831be48.js",
+    "precache-manifest.ecd8be226d606d0f05b8fdc1a7f3fb67.js": "/nextbus/precache-manifest.ecd8be226d606d0f05b8fdc1a7f3fb67.js",
     "service-worker.js": "/nextbus/service-worker.js",
-    "static/css/main.1ed32513.chunk.css.map": "/nextbus/static/css/main.1ed32513.chunk.css.map",
-    "static/js/2.fd267adf.chunk.js.LICENSE": "/nextbus/static/js/2.fd267adf.chunk.js.LICENSE"
+    "static/css/main.b6ed747e.chunk.css.map": "/nextbus/static/css/main.b6ed747e.chunk.css.map",
+    "static/js/2.52a7322a.chunk.js.LICENSE": "/nextbus/static/js/2.52a7322a.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.20a07480.js",
-    "static/js/2.fd267adf.chunk.js",
-    "static/css/main.1ed32513.chunk.css",
-    "static/js/main.c0fadf26.chunk.js"
+    "static/js/2.52a7322a.chunk.js",
+    "static/css/main.b6ed747e.chunk.css",
+    "static/js/main.8f462401.chunk.js"
   ]
 }
