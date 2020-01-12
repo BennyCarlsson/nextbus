@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useCallback } from "react"
-import logo from "./logo.png"
 import "./App.css"
 import { getData } from "./utils"
 import { partillePort, nordstan } from "./constants"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faArrowRight, faExchangeAlt } from "@fortawesome/free-solid-svg-icons"
+
 function App() {
   const [timeTable, setTimeTable] = useState()
   const [from, setFrom] = useState(partillePort)
@@ -27,8 +29,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1 onClick={getTimeTable}>Nästa BussJävel!</h1>
         <h2>
           {timeTable && timeTable[0].time} ({timeTable && timeTable[0].rtTime})
         </h2>
@@ -36,8 +36,13 @@ function App() {
         <p>{timeTable && timeTable[2].time}</p>
         <p>{timeTable && timeTable[3].time}</p>
         <h3 onClick={handleSwap}>
-          {from.name} -> {destination.name}
+          {from.name} <FontAwesomeIcon icon={faArrowRight} /> {destination.name}
         </h3>
+        <FontAwesomeIcon
+          className="exchangeArrows"
+          onClick={handleSwap}
+          icon={faExchangeAlt}
+        />
       </header>
     </div>
   )
