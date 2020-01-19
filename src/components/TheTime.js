@@ -11,11 +11,7 @@ const TheTime = props => {
         <h1 className="nextBusTime">{time}</h1>
       </div>
       <div className="TheTimeBlock">
-        {time !== realTime || true ? (
-          <h2 className="realTime">({realTime})</h2>
-        ) : (
-          ""
-        )}
+        {time !== realTime ? <h2 className="realTime">({realTime})</h2> : ""}
       </div>
     </div>
   )

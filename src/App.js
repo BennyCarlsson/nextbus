@@ -14,13 +14,13 @@ import FromTo from "./components/FromTo"
 
 function App() {
   const [timeTable, setTimeTable] = useState()
+  const fromStopLocalStorage = getFromStopFromLocalStorage()
   const [fromStop, setFromStop] = useState(
-    getFromStopFromLocalStorage() ? getFromStopFromLocalStorage() : partillePort
+    fromStopLocalStorage ? fromStopLocalStorage : partillePort
   )
+  const destinationStopLocalStorage = getDestinationStopFromLocalStorage()
   const [destinationStop, setDestionationStop] = useState(
-    getDestinationStopFromLocalStorage()
-      ? getDestinationStopFromLocalStorage
-      : nordstan
+    destinationStopLocalStorage ? destinationStopLocalStorage : nordstan
   )
 
   const getTimeTable = useCallback(async () => {
