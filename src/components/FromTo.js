@@ -1,6 +1,6 @@
 import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faArrowRight, faExchangeAlt } from "@fortawesome/free-solid-svg-icons"
+import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons"
 
 const FromTo = props => {
   const { handleSwap, from, destination } = props

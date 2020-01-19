@@ -1,6 +1,12 @@
 import React, { useEffect, useState, useCallback, Fragment } from "react"
 import "./App.css"
-import { getData } from "./utils"
+import {
+  getData,
+  getFromStopFromLocalStorage,
+  getDestinationStopFromLocalStorage,
+  saveFromStopToLocalStorage,
+  saveDestinationStopToLocalStorage
+} from "./utils"
 import { partillePort, nordstan } from "./constants"
 import TheTime from "./components/TheTime"
 import NextTimes from "./components/NextTimes"
@@ -8,23 +14,31 @@ import FromTo from "./components/FromTo"
 
 function App() {
   const [timeTable, setTimeTable] = useState()
-  const [from, setFrom] = useState(partillePort)
-  const [destination, setDestionation] = useState(nordstan)
+  const [fromStop, setFromStop] = useState(
+    getFromStopFromLocalStorage() ? getFromStopFromLocalStorage() : partillePort
+  )
+  const [destinationStop, setDestionationStop] = useState(
+    getDestinationStopFromLocalStorage()
+      ? getDestinationStopFromLocalStorage
+      : nordstan
+  )
 
   const getTimeTable = useCallback(async () => {
-    const data = await getData(from.id, destination.id)
+    const data = await getData(fromStop.id, destinationStop.id)
     setTimeTable(data)
-  }, [from, destination])
+  }, [fromStop, destinationStop])
 
   useEffect(() => {
     getTimeTable()
   }, [getTimeTable])
 
   const handleSwap = () => {
-    const tempFrom = from
-    const tempDestination = destination
-    setFrom(tempDestination)
-    setDestionation(tempFrom)
+    const newDestinationStop = fromStop
+    const newFromStop = destinationStop
+    setFromStop(newFromStop)
+    setDestionationStop(newDestinationStop)
+    saveFromStopToLocalStorage(newFromStop)
+    saveDestinationStopToLocalStorage(newDestinationStop)
   }
 
   return (
@@ -37,8 +51,8 @@ function App() {
           </div>
           <FromTo
             handleSwap={handleSwap}
-            from={from}
-            destination={destination}
+            from={fromStop}
+            destination={destinationStop}
           />
         </div>
       ) : (
