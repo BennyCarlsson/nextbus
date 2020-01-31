@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useCallback, Fragment } from "react"
 import "./App.css"
+import { getData } from "./utils/api"
 import {
-  getData,
   getFromStopFromLocalStorage,
   getDestinationStopFromLocalStorage,
   saveFromStopToLocalStorage,
   saveDestinationStopToLocalStorage
-} from "./utils"
-import { partillePort, nordstan } from "./constants"
+} from "./utils/localstorage"
+import { partillePort, nordstan } from "./utils/constants"
 import TheTime from "./components/TheTime"
 import NextTimes from "./components/NextTimes"
 import FromTo from "./components/FromTo"
@@ -42,9 +42,9 @@ function App() {
   }
 
   return (
-    <Fragment>
+    <div className="App">
       {timeTable ? (
-        <div className="App">
+        <Fragment>
           <div className="TimeTable">
             <TheTime timeTable={timeTable} />
             <NextTimes timeTable={timeTable} />
@@ -54,11 +54,11 @@ function App() {
             from={fromStop}
             destination={destinationStop}
           />
-        </div>
+        </Fragment>
       ) : (
-        ""
+        <p>fetching data..</p>
       )}
-    </Fragment>
+    </div>
   )
 }
 

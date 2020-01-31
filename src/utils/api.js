@@ -1,22 +1,8 @@
+import { getTime, getExpireTime } from "./utils"
+
 var token = { accessToken: "", expires: null }
 const id =
   "T0hDc2txdEp6cDhMYlVmRjhsaWVfeERHdDBBYTp6ME5wWWY3dlYxbUFhTEVFbkdyRFprTGEwODBh"
-
-export const saveFromStopToLocalStorage = fromStop => {
-  localStorage.setItem("fromStop", JSON.stringify(fromStop))
-}
-
-export const saveDestinationStopToLocalStorage = destinationStop => {
-  localStorage.setItem("destinationStop", JSON.stringify(destinationStop))
-}
-
-export const getFromStopFromLocalStorage = () => {
-  return JSON.parse(localStorage.getItem("fromStop"))
-}
-
-export const getDestinationStopFromLocalStorage = () => {
-  return JSON.parse(localStorage.getItem("destinationStop"))
-}
 
 export const getData = async (from, destination) => {
   let data
@@ -53,19 +39,6 @@ const isTokenValid = () => {
   return true
 }
 
-const setToken = async () => {
-  const data = await fetchAccessToken()
-  const expires = getExpireTime(data.expires_in)
-  const accessToken = data.access_token
-  token = { accessToken, expires }
-}
-
-const getExpireTime = secondsToExpires => {
-  let date = new Date()
-  date.setSeconds(date.getSeconds() + secondsToExpires)
-  return date
-}
-
 const fetchAccessToken = async () => {
   const response = await fetch("https://api.vasttrafik.se:443/token", {
     headers: {
@@ -79,10 +52,9 @@ const fetchAccessToken = async () => {
   return data
 }
 
-const getTime = () => {
-  //Todo gets the buses from exactly now. Will it show late busses pass the time?
-  const now = new Date()
-  const date = now.toISOString().substr(0, 10)
-  const time = now.toTimeString().substr(0, 5)
-  return { date, time }
+const setToken = async () => {
+  const data = await fetchAccessToken()
+  const expires = getExpireTime(data.expires_in)
+  const accessToken = data.access_token
+  token = { accessToken, expires }
 }
