@@ -4,26 +4,26 @@ var token = { accessToken: "", expires: null }
 const id =
   "T0hDc2txdEp6cDhMYlVmRjhsaWVfeERHdDBBYTp6ME5wWWY3dlYxbUFhTEVFbkdyRFprTGEwODBh"
 
-export const getData = async (from, destination) => {
+export const getData = async (fromStopId, destinationStopId) => {
   let data
   if (!isTokenValid()) {
     await setToken()
   }
-  let response = await fetchData(from, destination)
+  let response = await fetchData(fromStopId, destinationStopId)
   if (response.status === 401) {
     await setToken()
-    response = await fetchData(from, destination)
+    response = await fetchData(fromStopId, destinationStopId)
   }
   if (response.status === 200) {
     data = await response.json()
-    return data.DepartureBoard.Departure
+    return data
   }
   return data
 }
 
-const fetchData = async (from, to) => {
+const fetchData = async (fromStopId, destinationStopId) => {
   const { date, time } = getTime()
-  const tripUrl = `https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=${from}&direction=${to}&date=${date}&time=${time}&format=json`
+  const tripUrl = `https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=${fromStopId}&direction=${destinationStopId}&date=${date}&time=${time}&format=json`
   const response = await fetch(tripUrl, {
     method: "GET",
     headers: {

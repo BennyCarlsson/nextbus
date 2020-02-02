@@ -14,6 +14,7 @@ import FromTo from "./components/FromTo"
 
 function App() {
   const [timeTable, setTimeTable] = useState()
+  const [error, setError] = useState({ isError: false })
   const fromStopLocalStorage = getFromStopFromLocalStorage()
   const [fromStop, setFromStop] = useState(
     fromStopLocalStorage ? fromStopLocalStorage : partillePort
@@ -25,12 +26,31 @@ function App() {
 
   const getTimeTable = useCallback(async () => {
     const data = await getData(fromStop.id, destinationStop.id)
-    setTimeTable(data)
+    handleData(data)
   }, [fromStop, destinationStop])
 
   useEffect(() => {
     getTimeTable()
   }, [getTimeTable])
+
+  const handleData = data => {
+    if (data) {
+      if (data.DepartureBoard && data.DepartureBoard.error) {
+        setError({
+          isError: true,
+          title: data.DepartureBoard.error,
+          text: data.DepartureBoard.errorText
+        })
+        return
+      }
+      if (data.DepartureBoard.Departure) {
+        setTimeTable(data.DepartureBoard.Departure)
+        setError({ isError: false })
+        return
+      }
+    }
+    setError({ isError: true, title: "Oops!", text: "Something went wrong 🤔" })
+  }
 
   const handleSwap = () => {
     const newDestinationStop = fromStop
@@ -41,9 +61,19 @@ function App() {
     saveDestinationStopToLocalStorage(newDestinationStop)
   }
 
+  const isLoading = () => {
+    return !error.isError && !timeTable
+  }
+
   return (
     <div className="App">
-      {timeTable ? (
+      {error.isError && (
+        <Fragment>
+          <h2>{error.title}</h2>
+          <p>{error.text}</p>
+        </Fragment>
+      )}
+      {timeTable && (
         <Fragment>
           <div className="TimeTable">
             <TheTime timeTable={timeTable} />
@@ -55,9 +85,8 @@ function App() {
             destination={destinationStop}
           />
         </Fragment>
-      ) : (
-        <p>fetching data..</p>
       )}
+      {isLoading() && <p>fetching data..</p>}
     </div>
   )
 }
