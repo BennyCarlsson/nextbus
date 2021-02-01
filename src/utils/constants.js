@@ -1,4 +1,4 @@
-const partillePortId = "9022014013213001"
+const partillePortId = "9021014013213000"
 const nordstanId = "9021014004945000"
 const GothenburgCentral = "9021014008000000"
 const partilleStationId = "9021014013715000"

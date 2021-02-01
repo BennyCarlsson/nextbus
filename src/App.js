@@ -7,7 +7,7 @@ import {
   saveFromStopToLocalStorage,
   saveDestinationStopToLocalStorage
 } from "./utils/localstorage"
-import { partillePort, nordstan } from "./utils/constants"
+import { partilleCentrum, nordstan } from "./utils/constants"
 import TheTime from "./components/TheTime"
 import NextTimes from "./components/NextTimes"
 import FromTo from "./components/FromTo"
@@ -17,7 +17,7 @@ function App() {
   const [error, setError] = useState({ isError: false })
   const fromStopLocalStorage = getFromStopFromLocalStorage()
   const [fromStop, setFromStop] = useState(
-    fromStopLocalStorage ? fromStopLocalStorage : partillePort
+    fromStopLocalStorage ? fromStopLocalStorage : partilleCentrum
   )
   const destinationStopLocalStorage = getDestinationStopFromLocalStorage()
   const [destinationStop, setDestionationStop] = useState(
@@ -25,9 +25,9 @@ function App() {
   )
 
   const getTimeTable = useCallback(async () => {
-    const data = await getData(fromStop.id, destinationStop.id)
+    const data = await getData(fromStop.id)
     handleData(data)
-  }, [fromStop, destinationStop])
+  }, [fromStop])
 
   useEffect(() => {
     getTimeTable()
